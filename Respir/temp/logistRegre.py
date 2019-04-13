@@ -17,7 +17,7 @@ b = tf.Variable(tf.random_normal([1]), name = 'biads')
 hypothesis = tf.sigmoid(tf.matmul(X, W) + b)
 # cost/Loss function
 cost = -tf.reduce_mean(Y * tf.log(tf.clip_by_value(hypothesis, 1e-8, 1.)) + (1-Y) * tf.log(tf.clip_by_value(1- hypothesis, 1e-8, 1.)))
-train = tf.train.GradientDescentOptimizer(learning_rate = 0.00000000001).minimize(cost)
+train = tf.train.GradientDescentOptimizer(learning_rate = 0.0000001).minimize(cost)
 
 # Accuracy computation
 # True if hypothesis>0.5 else False
