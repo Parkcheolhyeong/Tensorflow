@@ -1,6 +1,9 @@
 import tensorflow as tf
 import numpy as np
 
+mirrored_strategy = tf.distribute.MirroredStrategy(devices=["/gpu:0"])
+tf.debugging.set_log_device_placement(True)
+
 xy = np.loadtxt('test.csv', delimiter = ',', dtype = np.float32)
 xy = np.transpose(xy)
 
@@ -12,7 +15,6 @@ nb_classes = 2
 
 X = tf.placeholder(tf.float32, [None, 600])
 Y = tf.placeholder(tf.int32, [None, 1])
-
 
 Y_one_hot = tf.one_hot(Y, nb_classes)
 Y_one_hot = tf.reshape(Y_one_hot, [-1, nb_classes])
@@ -43,4 +45,3 @@ with tf.Session() as sess:
     pred =- sess.run(prediction, feed_dict= {X: x_data})
     for p, y, in zip(pred, y_data.flatten()):
         print("[{}] Prediction: {} True Y: {}".format(p==int(y), p, int(y)))
-
