@@ -35,12 +35,17 @@ correct_prediction = tf.equal(prediction, tf.argmax(Y_one_hot, 1))
 accuracy = tf.reduce_mean(tf.cast(correct_prediction, tf.float32))
 
 with tf.Session() as sess:
+    writer = tf.summary.FileWriter("./logs/respir_softmax")
+    writer.add_graph(sess.graph)  # Show the graph
+
     sess.run(tf.global_variables_initializer())
     for step in range(100000):
         sess.run(optimizer, feed_dict = {X: x_data, Y: y_data})
         if step % 1000 == 0:
             loss, acc = sess.run([cost, accuracy], feed_dict = {X: x_data, Y: y_data})
             print("Step: {:5}\tLoss: {:.3f}\tAcc: {:.2%}".format(step, loss, acc))
+
+        writer.add_summary(summary, global_step=step)
 
     pred =- sess.run(prediction, feed_dict= {X: x_data})
     for p, y, in zip(pred, y_data.flatten()):
