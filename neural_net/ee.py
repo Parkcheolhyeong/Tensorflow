@@ -56,7 +56,7 @@ with tf.Session() as sess:
 
 
     for p, y, in zip(c, y_data.flatten()):
-        value_predict = "무호흡" if p != 0 else "호흡"
+        value_predict = "무호흡" if p != 0 else "호흡s"
         value_true = "무호흡" if int(y) == 1 else "호흡"
         #print("[{}] Prediction: {}({}) True Y: {}({}) Result: {}".format(p==int(y), "무호흡" if p==1 else "호흡", p, "무호흡" if int(y)==1 else "호흡", int(y), '결과'))
         #print("[{}] Prediction: {}({}) True Y: {}({}) Result: {}".format(p!=0, "무호흡" if p!=0 else "호흡", p, "무호흡" if int(y)==1 else "호흡", int(y), '결과'))
