@@ -56,8 +56,8 @@ with tf.Session() as sess:
 
 
     for p, y, in zip(c, y_data.flatten()):
-        value_predict = "무호흡" if p != 0 else "호흡s"
-        value_true = "무호흡" if int(y) == 1 else "호흡"
-        #print("[{}] Prediction: {}({}) True Y: {}({}) Result: {}".format(p==int(y), "무호흡" if p==1 else "호흡", p, "무호흡" if int(y)==1 else "호흡", int(y), '결과'))
-        #print("[{}] Prediction: {}({}) True Y: {}({}) Result: {}".format(p!=0, "무호흡" if p!=0 else "호흡", p, "무호흡" if int(y)==1 else "호흡", int(y), '결과'))
-        print("[{}] Prediction: {}({}) True Y: {}({}) Result: {}".format((value_predict is value_true), "무호흡" if p!=0 else "호흡", p, "무호흡" if int(y)==1 else "호흡", int(y), '결과'))
+        value_predict = "Abnormal" if p != 0 else "Normal"
+        value_true = "Abnormal" if int(y) == 1 else "Normal"
+        #print("[{}] Prediction: {}({}) True Y: {}({}) Result: {}".format(p==int(y), "Abnormal" if p==1 else "호흡", p, "Abnormal" if int(y)==1 else "호흡", int(y), '결과'))
+        #print("[{}] Prediction: {}({}) True Y: {}({}) Result: {}".format(p!=0, "Abnormal" if p!=0 else "호흡", p, "Abnormal" if int(y)==1 else "호흡", int(y), '결과'))
+        print("[{}] Prediction: {}({}) True Y: {}({}) Result: {}".format((value_predict is value_true), "Abnormal" if p!=0 else "Normal", p, "Normal" if int(y)==1 else "Normal", int(y), 'Result'))
