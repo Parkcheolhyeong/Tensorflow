@@ -10,6 +10,9 @@ xy_test = np.transpose(xy_test)
 x_data = xy_smaple[:, 0:-1]
 y_data = xy_smaple[:, [-1]]
 
+x_test = xy_test[:, 0:-1]
+y_test = xy_test[:, [-1]]
+
 X = tf.placeholder(tf.float32, [None, 600])
 Y = tf.placeholder(tf.float32, [None, 1])
 
@@ -43,9 +46,9 @@ with tf.Session() as sess:
     # Initialize TensorFlow variables
     sess.run(tf.global_variables_initializer())
 
-    for step in range(10001):
+    for step in range(20000):
         _, cost_val = sess.run([train, cost], feed_dict={X: x_data, Y: y_data})
-        if step % 100 == 0:
+        if step % 500 == 0:
             print(step, cost_val)
 
     # Accuracy report
@@ -55,9 +58,11 @@ with tf.Session() as sess:
     print("\nHypothesis: ", h, "\nCorrect: ", c, "\nAccuracy: ", a)
 
 
-    for p, y, in zip(c, y_data.flatten()):
+    for p, y, in zip(c, y_test.flatten()):
         value_predict = "Abnormal" if p != 0 else "Normal"
         value_true = "Abnormal" if int(y) == 1 else "Normal"
-        #print("[{}] Prediction: {}({}) True Y: {}({}) Result: {}".format(p==int(y), "Abnormal" if p==1 else "호흡", p, "Abnormal" if int(y)==1 else "호흡", int(y), '결과'))
+        print("[{}] Prediction: {}({}) True Y: {}({}) Result: {}".format
+              (p==int(y), "Abnormal" if p==1 else "Normal", p,
+               "Abnormal" if int(y)==1 else "Normal", int(y), 'Result'))
         #print("[{}] Prediction: {}({}) True Y: {}({}) Result: {}".format(p!=0, "Abnormal" if p!=0 else "호흡", p, "Abnormal" if int(y)==1 else "호흡", int(y), '결과'))
-        print("[{}] Prediction: {}({}) True Y: {}({}) Result: {}".format((value_predict is value_true), "Abnormal" if p!=0 else "Normal", p, "Normal" if int(y)==1 else "Normal", int(y), 'Result'))
+        #print("[{}] Prediction: {}({}) True Y: {}({}) Result: {}".format((value_predict is value_true), "Abnormal" if p!=0 else "Normal", p, "Normal" if int(y)==1 else "Normal", int(y), 'Result'))
